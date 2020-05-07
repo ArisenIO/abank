@@ -26,9 +26,9 @@
     randombytes "^2.1.0"
     text-encoding "0.7.0"
 
-"@walletpack/core@^1.0.41":
+"@abank/core@^1.0.41":
   version "1.0.41"
-  resolved "https://registry.yarnpkg.com/@walletpack/core/-/core-1.0.41.tgz#4aee7bf7a4c3c5e511f71a84765450c479925399"
+  resolved "https://registry.yarnpkg.com/@abank/core/-/core-1.0.41.tgz#4aee7bf7a4c3c5e511f71a84765450c479925399"
   integrity sha512-iOrvc5ZCsLLho3+F1Nx0mIj0mCZT6mJmnh3S54IQ1/Z3h3cN5DkLU6gyy0JxMX9dRYnLHmqUYjVkdjr1o1Z20w==
   dependencies:
     aes-oop "^1.0.4"

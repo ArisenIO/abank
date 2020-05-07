@@ -1,5 +1,5 @@
 {
-  "name": "@walletpack/bitcoin",
+  "name": "@abank/bitcoin",
   "version": "1.0.55",
   "description": "> TODO: description",
   "author": "GetScatter Ltd. 2019",
@@ -15,7 +15,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@walletpack/core": "^1.0.50",
+    "@abank/core": "^1.0.50",
     "bitcoinjs-lib": "^5.1.2"
   },
   "gitHead": "70bd19f93b503618a79eb519eef082bfc40b16d7",

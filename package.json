@@ -1,5 +1,5 @@
 {
-  "name": "walletpack",
+  "name": "abank",
   "private": true,
   "scripts": {
     "postinstall": "lerna bootstrap",
@@ -10,7 +10,14 @@
     "test": "npm run testfile \"./packages/**/__tests__/**/*.test.js\"",
     "pack": "webpack-cli --mode=production --display-error-details"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@abank/bitcoin": "^1.0.55",
+    "@abank/core": "^1.0.50",
+    "@abank/eosio": "0.0.61",
+    "@abank/ethereum": "0.0.59",
+    "@abank/tron": "0.0.62",
+    "@abank/arisen":"1.0.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.6.4",

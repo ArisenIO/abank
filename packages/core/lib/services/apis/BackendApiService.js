@@ -1,5 +1,5 @@
 import IdGenerator from "../../util/IdGenerator";
-import ecc from 'eosjs-ecc';
+import ecc from '@arisencore/ecc';
 
 // const baseUrl = `http://localhost:6547/v1/`;
 const baseUrl = `https://api.get-scatter.com/v1/`;

@@ -14,9 +14,9 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
   integrity sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
 
-"@walletpack/core@^1.0.27":
+"@abank/core@^1.0.27":
   version "1.0.27"
-  resolved "https://registry.yarnpkg.com/@walletpack/core/-/core-1.0.27.tgz#e2eb1e8e225cde272a6beb8c39851a6d1b1a67db"
+  resolved "https://registry.yarnpkg.com/@abank/core/-/core-1.0.27.tgz#e2eb1e8e225cde272a6beb8c39851a6d1b1a67db"
   integrity sha512-ruQzK0kl1Z/xwcIts/ew6/5gAtZuVESBRlphGBG5MLBerrxS4b3m+iJKrxw8TtXXhUZuNTi/rxg4ZXh/n1VIZQ==
   dependencies:
     aes-oop "^1.0.4"

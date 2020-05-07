@@ -1,15 +1,15 @@
-import Plugin from                  '@walletpack/core/plugins/Plugin';
-import * as PluginTypes from        '@walletpack/core/plugins/PluginTypes';
-import {Blockchains} from           '@walletpack/core/models/Blockchains'
-import Network from                 '@walletpack/core/models/Network'
-import Account from                 '@walletpack/core/models/Account'
-import KeyPairService from          '@walletpack/core/services/secure/KeyPairService'
-import ObjectHelpers from           '@walletpack/core/util/ObjectHelpers'
-import * as Actions from            '@walletpack/core/models/api/ApiActions';
-import Token from                   "@walletpack/core/models/Token";
-import StoreService from            "@walletpack/core/services/utility/StoreService";
-import EventService from            "@walletpack/core/services/utility/EventService";
-import SigningService from          "@walletpack/core/services/secure/SigningService";
+import Plugin from                  '@abank/core/plugins/Plugin';
+import * as PluginTypes from        '@abank/core/plugins/PluginTypes';
+import {Blockchains} from           '@abank/core/models/Blockchains'
+import Network from                 '@abank/core/models/Network'
+import Account from                 '@abank/core/models/Account'
+import KeyPairService from          '@abank/core/services/secure/KeyPairService'
+import ObjectHelpers from           '@abank/core/util/ObjectHelpers'
+import * as Actions from            '@abank/core/models/api/ApiActions';
+import Token from                   "@abank/core/models/Token";
+import StoreService from            "@abank/core/services/utility/StoreService";
+import EventService from            "@abank/core/services/utility/EventService";
+import SigningService from          "@abank/core/services/secure/SigningService";
 
 import {Ecc as ecc, Api, Fio, RpcError, Numeric} from '@fioprotocol/fiojs';
 const {base64ToBinary, arrayToHex} = Numeric;

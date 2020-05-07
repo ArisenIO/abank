@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@walletpack/core@^1.0.27":
+"@abank/core@^1.0.27":
   version "1.0.27"
-  resolved "https://registry.yarnpkg.com/@walletpack/core/-/core-1.0.27.tgz#e2eb1e8e225cde272a6beb8c39851a6d1b1a67db"
+  resolved "https://registry.yarnpkg.com/@abank/core/-/core-1.0.27.tgz#e2eb1e8e225cde272a6beb8c39851a6d1b1a67db"
   integrity sha512-ruQzK0kl1Z/xwcIts/ew6/5gAtZuVESBRlphGBG5MLBerrxS4b3m+iJKrxw8TtXXhUZuNTi/rxg4ZXh/n1VIZQ==
   dependencies:
     aes-oop "^1.0.4"

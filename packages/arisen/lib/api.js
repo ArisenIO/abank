@@ -63,7 +63,7 @@ export default class LightAPI {
 		const parseResults = res => {
 			return res.balances.map(balance => {
 				return Token.fromJson({
-					blockchain:Blockchains.EOSIO,
+					blockchain:Blockchains.ARISEN,
 					contract:balance.contract,
 					symbol:balance.currency,
 					name:balance.currency,

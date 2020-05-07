@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@walletpack%2fcore: Not found
+  Error: https://registry.yarnpkg.com/@abank%2fcore: Not found
       at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65003:18)
       at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:129018:22)
       at Request.emit (events.js:189:13)
@@ -47,7 +47,7 @@ npm manifest:
     },
     "dependencies": {
       "bitcoinjs-lib": "^5.1.2",
-      "@walletpack/core": "^0.0.0"
+      "@abank/core": "^0.0.0"
     }
   }
 

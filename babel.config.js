@@ -9,7 +9,7 @@ if(process.env.WALLETPACK_TESTING){
 	// are different for the packages internally.
 	EXPORTS.plugins.push(["module-resolver", {
 		"alias": {
-			"^@walletpack/core/(.+)": ([, name]) => {
+			"^@abank/core/(.+)": ([, name]) => {
 				// Catching absolute lib imports
 				if(name.indexOf('lib') > -1) name = name.replace('lib/', '');
 				// Prefixing includes

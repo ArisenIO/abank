@@ -15,9 +15,9 @@ import StoreService from            "@abank/core/services/utility/StoreService";
 import EventService from            "@abank/core/services/utility/EventService";
 import SigningService from          "@abank/core/services/secure/SigningService";
 import {POST} from                  "@abank/core/services/apis/BackendApiService";
-import ecc from 'eosjs-ecc';
-import { Api, JsonRpc } from 'eosjs';
-import * as numeric from "eosjs/dist/eosjs-numeric";
+import ecc from '';
+import { Api, JsonRpc } from 'arisenjs';
+import * as numeric from "arisenjs/dist/arisenjs-numeric";
 
 import LightAPI from './api';
 
@@ -25,14 +25,14 @@ export const TextEncoder = require('util') ? require('util').TextEncoder : requi
 export const TextDecoder = require('util') ? require('util').TextDecoder : require('text-encoding') ? require('text-encoding').TextDecoder : global.TextDecoder;
 export const encoderOptions = TextEncoder ? {textEncoder:new TextEncoder(), textDecoder:new TextDecoder()} : {};
 
-const getEosjsApi = rpc => {
+const getArisenjsApi = rpc => {
 	let params = rpc ? {rpc} : {};
 	if(TextEncoder) params = Object.assign(params, encoderOptions)
 
 	return new Api(params)
 }
 
-export const eosjsUtil = getEosjsApi();
+export const arisenjsUtil = getArisenjsApi();
 
 const MAINNET_CHAIN_ID = 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906';
 
@@ -108,9 +108,9 @@ const EXPLORER = {
 
 
 let getABIsFromBackend = false;
-export default class EOS extends Plugin {
+export default class RSN extends Plugin {
 
-	constructor(){ super(Blockchains.EOSIO, PluginTypes.BLOCKCHAIN_SUPPORT) }
+	constructor(){ super(Blockchains.ARISEN, PluginTypes.BLOCKCHAIN_SUPPORT) }
 
 
 	signatureProvider(accounts, reject, prompt = true){
@@ -123,7 +123,7 @@ export default class EOS extends Plugin {
 		}
 	}
 
-	getSignableEosjs(accounts, reject, prompt = true, signatureProvider = null){
+	getSignableArisenjs(accounts, reject, prompt = true, signatureProvider = null){
 		const isSingleAccount = accounts instanceof Account;
 		const rpc = new JsonRpc((isSingleAccount ? accounts.network() : accounts[0].network()).fullhost());
 		let params = {rpc, signatureProvider:signatureProvider ? signatureProvider : this.signatureProvider(accounts, reject, prompt)};
@@ -142,9 +142,9 @@ export default class EOS extends Plugin {
 	bustCache(){  }
 	defaultExplorer(){ return EXPLORER; }
 	accountFormatter(account){ return `${account.name}@${account.authority}` }
-	returnableAccount(account){ return { name:account.name, authority:account.authority, publicKey:account.publicKey, blockchain:Blockchains.EOSIO }}
+	returnableAccount(account){ return { name:account.name, authority:account.authority, publicKey:account.publicKey, blockchain:Blockchains.ARISEN }}
 
-	contractPlaceholder(){ return 'eosio.token'; }
+	contractPlaceholder(){ return 'arisen.token'; }
 
 	checkNetwork(network){
 		return Promise.race([
@@ -154,11 +154,11 @@ export default class EOS extends Plugin {
 	}
 
 	getEndorsedNetwork(){
-		return new Network('EOS Mainnet', 'https', 'nodes.get-scatter.com', 443, Blockchains.EOSIO, MAINNET_CHAIN_ID)
+		return new Network('ARISEN Mainnet', 'https', 'nodes.get-scatter.com', 443, Blockchains.ARISEN, MAINNET_CHAIN_ID)
 	}
 
 	isEndorsedNetwork(network){
-		return network.blockchain === Blockchains.EOSIO && network.chainId === MAINNET_CHAIN_ID;
+		return network.blockchain === Blockchains.ARISEN && network.chainId === MAINNET_CHAIN_ID;
 	}
 
 	async getChainId(network){
@@ -171,11 +171,11 @@ export default class EOS extends Plugin {
 	async proxyVote(account, proxyAccount, prompt = false){
 		return new Promise(async (resolve, reject) => {
 
-			const eos = this.getSignableEosjs(account, reject, prompt);
+			const rsn = this.getSignableArisenjs(account, reject, prompt);
 
-			await eos.transact({
+			await rsn.transact({
 				actions:[{
-					account: 'eosio',
+					account: 'arisen',
 					name:'voteproducer',
 					authorization: [{
 						actor: account.sendable(),
@@ -208,7 +208,7 @@ export default class EOS extends Plugin {
 	async changePermissions(account, keys){
 		if(!keys) return;
 		return new Promise(async (resolve, reject) => {
-			const eos = this.getSignableEosjs(account, reject);
+			const rsn = this.getSignableArisenjs(account, reject);
 
 
 			const actions = Object.keys(keys).map(permission => {
@@ -240,7 +240,7 @@ export default class EOS extends Plugin {
 				const parent = permission === 'owner' ? '' : 'owner';
 
 				return {
-					account: 'eosio',
+					account: 'arisen',
 					name:'updateauth',
 					authorization: [{
 						actor: account.sendable(),
@@ -255,7 +255,7 @@ export default class EOS extends Plugin {
 				}
 			}).filter(x => !!x);
 
-			return eos.transact({actions},{
+			return rsn.transact({actions},{
 				blocksBehind: 3,
 				expireSeconds: 30,
 			})
@@ -270,7 +270,7 @@ export default class EOS extends Plugin {
 
 					const addAccount = async (keypair, authority) => {
 						const acc = account.clone();
-						acc.publicKey = keypair.publicKeys.find(x => x.blockchain === Blockchains.EOSIO).key,
+						acc.publicKey = keypair.publicKeys.find(x => x.blockchain === Blockchains.ARISEN).key,
 							acc.keypairUnique = keypair.unique();
 						acc.authority = authority;
 						return AccountService.addAccount(acc);
@@ -300,11 +300,11 @@ export default class EOS extends Plugin {
 	async refund(account){
 		return new Promise(async (resolve, reject) => {
 
-			const eos = this.getSignableEosjs(account, reject);
+			const rsn = this.getSignableArisenjs(account, reject);
 
-			await eos.transact({
+			await rsn.transact({
 				actions:[{
-					account: 'eosio',
+					account: 'arisen',
 					name:'refund',
 					authorization: [{
 						actor: account.sendable(),
@@ -391,7 +391,7 @@ export default class EOS extends Plugin {
 	accountsAreImported(){ return true; }
 	getImportableAccounts(keypair, network){
 		return new Promise((resolve, reject) => {
-			let publicKey = keypair.publicKeys.find(x => x.blockchain === Blockchains.EOSIO);
+			let publicKey = keypair.publicKeys.find(x => x.blockchain === Blockchains.ARISEN);
 			if(!publicKey) return resolve([]);
 			publicKey = publicKey.key;
 			getAccountsFromPublicKey(publicKey, network).then(accounts => {
@@ -408,7 +408,7 @@ export default class EOS extends Plugin {
 
 	isValidRecipient(name){ return /(^[a-z1-5.]{1}([a-z1-5.]{0,10}[a-z1-5])?$)/g.test(name); }
 	privateToPublic(privateKey, prefix = null){ try {
-		return ecc.PrivateKey(privateKey).toPublic().toString(prefix ? prefix : Blockchains.EOSIO.toUpperCase());
+		return ecc.PrivateKey(privateKey).toPublic().toString(prefix ? prefix : Blockchains.ARISEN.toUpperCase());
 	} catch(e) { return console.error(e); } }
 
 	validPrivateKey(privateKey){ try {
@@ -417,7 +417,7 @@ export default class EOS extends Plugin {
 
 	validPublicKey(publicKey, prefix = null){
 		try {
-			return ecc.PublicKey.fromStringOrThrow(publicKey, prefix ? prefix : Blockchains.EOSIO.toUpperCase());
+			return ecc.PublicKey.fromStringOrThrow(publicKey, prefix ? prefix : Blockchains.ARISEN.toUpperCase());
 		} catch(e){
 			return false;
 		}
@@ -474,12 +474,12 @@ export default class EOS extends Plugin {
 			return fetch(`${account.network().fullhost()}/v1/chain/get_table_rows`, {
 				method:"POST",
 				body:JSON.stringify({
-					code: "eosio",
+					code: "arisen",
 					index_position: 1,
 					json: true,
 					limit: 1,
 					lower_bound: account.name,
-					scope: "eosio",
+					scope: "arisen",
 					table: "rexbal",
 				})
 			}).then(x => x.json()).then(result => {
@@ -487,9 +487,9 @@ export default class EOS extends Plugin {
 				const rex = result.rows[0];
 				if(rex.owner !== account.name) return null;
 				const token = account.network().systemToken().clone();
-				token.symbol = 'REX';
+				token.symbol = 'RSN';
 				token.amount = parseFloat(rex.rex_balance.split(' ')[0]).toFixed(4);
-				token.unusable = 'REX';
+				token.unusable = 'RSN';
 				return token;
 			}).catch(() => null)
 		}
@@ -519,7 +519,7 @@ export default class EOS extends Plugin {
 		if(!fallback && await LightAPI.networkString(account.network())){
 			const balances = await LightAPI.balancesFor(account, account.network());
 			if(!balances) return this.balanceFor(account, tokens, true);
-			const blacklist = StoreService.get().state.scatter.settings.blacklistTokens.filter(x => x.blockchain === Blockchains.EOSIO).map(x => x.unique());
+			const blacklist = StoreService.get().state.scatter.settings.blacklistTokens.filter(x => x.blockchain === Blockchains.ARISEN).map(x => x.unique());
 			return balances.filter(x => !blacklist.includes(x.unique()));
 		}
 
@@ -533,14 +533,14 @@ export default class EOS extends Plugin {
 	}
 
 	defaultDecimals(){ return 4; }
-	defaultToken(){ return new Token(Blockchains.EOSIO, 'eosio.token', 'EOS', 'EOS', this.defaultDecimals(), MAINNET_CHAIN_ID) }
+	defaultToken(){ return new Token(Blockchains.ARISEN, 'arisen.token', 'RSN', 'RSN', this.defaultDecimals(), MAINNET_CHAIN_ID) }
 
 	async getRamPrice(network){
 		const parseAsset = asset => asset.split(' ')[0];
 		const getRamInfo = async () => getTableRows(network, {
 			json:true,
-			code:'eosio',
-			scope:'eosio',
+			code:'arisen',
+			scope:'arisen',
 			table:'rammarket'
 		}).then(res => {
 			const ramInfo = res.rows[0];
@@ -551,19 +551,19 @@ export default class EOS extends Plugin {
 		return (ramInfo[0] / ramInfo[1]).toFixed(8);
 	}
 
-	async createAccount(account, name, owner, active, eosUsed){
+	async createAccount(account, name, owner, active, rsnUsed){
 		return new Promise(async (resolve, reject) => {
 
 
 			const coreSymbol = account.network().systemToken().symbol;
 
-			const net = (eosUsed/4).toFixed(account.network().systemToken().decimals);
-			const cpu = (eosUsed-net).toFixed(account.network().systemToken().decimals);
+			const net = (rsnUsed/4).toFixed(account.network().systemToken().decimals);
+			const cpu = (rsnUsed-net).toFixed(account.network().systemToken().decimals);
 
 			if(net <= 0 || cpu <= 0) return reject("Invalid Resources");
 
 
-			const eos = this.getSignableEosjs(account, reject);
+			const rsn = this.getSignableArisenjs(account, reject);
 
 			const authorization = [{
 				actor: account.sendable(),
@@ -580,9 +580,9 @@ export default class EOS extends Plugin {
 				waits: []
 			});
 
-			await eos.transact({
+			await rsn.transact({
 				actions:[{
-					account: 'eosio',
+					account: 'arisen',
 					name:'newaccount',
 					authorization,
 					data:{
@@ -593,7 +593,7 @@ export default class EOS extends Plugin {
 					},
 				},
 					{
-						account: 'eosio',
+						account: 'arisen',
 						name:'buyrambytes',
 						authorization,
 						data:{
@@ -603,7 +603,7 @@ export default class EOS extends Plugin {
 						},
 					},
 					{
-						account: 'eosio',
+						account: 'arisen',
 						name:'delegatebw',
 						authorization,
 						data:{
@@ -628,7 +628,7 @@ export default class EOS extends Plugin {
 
 	async stakeOrUnstake(account, cpu, net, staking = true, prompt = true){
 		return new Promise(async (resolve, reject) => {
-			const eos = this.getSignableEosjs(account, reject, prompt);
+			const rsn = this.getSignableArisenjs(account, reject, prompt);
 
 			const name = staking ? 'delegatebw' : 'undelegatebw';
 			let data = staking ? {
@@ -644,9 +644,9 @@ export default class EOS extends Plugin {
 				unstake_cpu_quantity:cpu,
 			};
 
-			await eos.transact({
+			await rsn.transact({
 				actions:[{
-					account: 'eosio',
+					account: 'arisen',
 					name,
 					authorization: [{
 						actor: account.sendable(),
@@ -668,7 +668,7 @@ export default class EOS extends Plugin {
 	async buyOrSellRAM(account, bytes, buying = true){
 		return new Promise(async (resolve, reject) => {
 
-			const eos = this.getSignableEosjs(account, reject);
+			const rsn = this.getSignableArisenjs(account, reject);
 
 			const name = buying ? 'buyrambytes' : 'sellram';
 			let data = buying ? {
@@ -680,9 +680,9 @@ export default class EOS extends Plugin {
 				bytes
 			};
 
-			await eos.transact({
+			await rsn.transact({
 				actions:[{
-					account: 'eosio',
+					account: 'arisen',
 					name,
 					authorization: [{
 						actor: account.sendable(),
@@ -709,9 +709,9 @@ export default class EOS extends Plugin {
 
 
 		return new Promise(async (resolve, reject) => {
-			const eos = this.getSignableEosjs(account, reject, promptForSignature);
+			const rsn = this.getSignableArisenjs(account, reject, promptForSignature);
 
-			const result = await eos.transact({
+			const result = await rsn.transact({
 				actions:[{
 					account: contract,
 					name:'transfer',
@@ -754,7 +754,7 @@ export default class EOS extends Plugin {
 			const request = {
 				payload,
 				origin:payload.origin,
-				blockchain:'eos',
+				blockchain:'rsn',
 				requiredFields:{},
 				type:Actions.SIGN,
 				id:1,
@@ -829,7 +829,7 @@ export default class EOS extends Plugin {
 				const chainAbi = await getChainData(network, `get_raw_abi`, {account_name:account}).catch(() => null).then(x => x.abi);
 				if(!chainAbi) return console.error(`Could not fetch ABIs for ${account}`);
 				const rawAbi = numeric.base64ToBinary(chainAbi);
-				const abi = eosjsUtil.rawAbiToJson(rawAbi);
+				const abi = rsnjsUtil.rawAbiToJson(rawAbi);
 				return { account, rawAbi, abi};
 			}));
 		} catch(e){
@@ -838,10 +838,10 @@ export default class EOS extends Plugin {
 		}
 	}
 
-	async parseEosjsRequest(payload, network){
+	async parseArisenjsRequest(payload, network){
 		try {
 			const {transaction} = payload;
-			const api = getEosjsApi();
+			const api = getArisenjsApi();
 
 			const contracts = this.transactionContracts(transaction);
 			const abis = await this.fetchAbis(network, contracts);
@@ -870,10 +870,10 @@ export default class EOS extends Plugin {
 		}
 	}
 
-	async parseEosjs2Request(payload, network){
+	async parseArisenjs2Request(payload, network){
 		const {transaction} = payload;
 
-		const api = getEosjsApi();
+		const api = getArisenjsApi();
 
 		const contracts = this.transactionContracts(transaction);
 		const abis = await this.fetchAbis(network, contracts);
@@ -901,7 +901,7 @@ export default class EOS extends Plugin {
 
 	async requestParser(payload, network){
 		if(payload.transaction.hasOwnProperty('serializedTransaction'))
-			return this.parseEosjs2Request(payload, network);
-		else return this.parseEosjsRequest(payload, network);
+			return this.parseArisenjs2Request(payload, network);
+		else return this.parseArisenjsRequest(payload, network);
 	}
 }

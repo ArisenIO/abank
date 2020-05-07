@@ -1,5 +1,5 @@
 {
-  "name": "@walletpack/fio",
+  "name": "@abank/fio",
   "version": "0.0.27",
   "description": "> TODO: description",
   "author": "GetScatter Ltd. 2019",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@fioprotocol/fiojs": "^1.0.1",
-    "@walletpack/core": "^1.0.50"
+    "@abank/core": "^1.0.50"
   },
   "devDependencies": {
     "@fioprotocol/fiosdk": "latest"

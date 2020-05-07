@@ -17,5 +17,5 @@ try {
 	rimraf.sync("./dist");
 	rimraf.sync("./lib");
 } catch(e){
-	console.error('Walletpack prepare.js error', e);
+	console.error('abank prepare.js error', e);
 }

@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: C:\Work\Libraries\walletpack\packages\fio\package.json: Unexpected token } in JSON at position 405
+  SyntaxError: C:\Work\Libraries\abank\packages\fio\package.json: Unexpected token } in JSON at position 405
       at JSON.parse (<anonymous>)
       at C:\Program Files (x86)\Yarn\lib\cli.js:1631:59
       at Generator.next (<anonymous>)
@@ -23,7 +23,7 @@ Trace:
 
 npm manifest: 
   {
-    "name": "@walletpack/fio",
+    "name": "@abank/fio",
     "version": "0.0.1",
     "description": "> TODO: description",
     "author": "GetScatter Ltd. 2019",

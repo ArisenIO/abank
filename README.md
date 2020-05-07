@@ -1,4 +1,4 @@
-# WalletPack
+# Abank
 
 This is a wallet building SDK which takes care of all of the heavy lifting for creating blockchain wallets.
 
@@ -10,14 +10,14 @@ Currently being used in Scatter Desktop, Scatter Mobile, and Scatter Bridge.
 
 Install the core plus any blockchains you want to support
 ```
-npm i -S @walletpack/core @walletpack/eosio @walletpack/ethereum @walletpack/bitcoin @walletpack/tron
+npm i -S @abank/core @abank/eosio @abank/ethereum @abank/bitcoin @abank/tron @abank/Arisen
 ```
 
 ### Call initialize first.
 
 ```js
 
-import WalletPack from '@walletpack/core';
+import Abank from '@abank/core';
 
 const eventListener = (type, data) => {
     console.log('event', type, data);
@@ -28,7 +28,7 @@ const eventListener = (type, data) => {
     }
 	console.log('event', type, data);
 };
-WalletPack.initialize(
+Abank.initialize(
     // --------------------------------------------
     // blockchains & blockchain plugins
 	{
@@ -36,13 +36,15 @@ WalletPack.initialize(
 			EOSIO:'eos',
 			ETH:'eth',
 			// TRX:'trx',
-			BTC:'btc',
+            BTC:'btc',
+            ARISEN:'rsn'
 		},
 		plugins:[
-			require('@walletpack/eosio').default,
-			require('@walletpack/ethereum').default,
-			// require('@walletpack/tron').default,
-			require('@walletpack/bitcoin').default,
+			require('@abank/eosio').default,
+			require('@abank/ethereum').default,
+			// require('@abank/tron').default,
+            require('@abank/bitcoin').default,
+            require('@abank/arisen').default
 		]
 	},
     // --------------------------------------------

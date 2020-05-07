@@ -1,5 +1,5 @@
 import IdGenerator from '../util/IdGenerator'
-import {Blockchains} from './Blockchains';
+import {Blockchains} from '../models/Blockchains';
 
 export default class Contact {
 

@@ -187,7 +187,7 @@ export default class PluginInterface extends Plugin {
 	defaultToken(){}
 
 	/***
-	 * This is usually used internally inside of your walletpack plugin.
+	 * This is usually used internally inside of your abank plugin.
 	 * Simply takes a payload and converts it into a request that signing popups understand.
 	 * Check one of the existing plugins for the structures.
 	 * EXAMPLE:

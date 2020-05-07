@@ -1,15 +1,15 @@
-import Plugin from                      '@walletpack/core/plugins/Plugin';
-import * as PluginTypes from            '@walletpack/core/plugins/PluginTypes';
-import * as Actions from                '@walletpack/core/models/api/ApiActions';
-import {Blockchains} from               '@walletpack/core/models/Blockchains'
-import Network from                     '@walletpack/core/models/Network'
-import KeyPairService from              '@walletpack/core/services/secure/KeyPairService';
-import Token from                       "@walletpack/core/models/Token";
-import HardwareService from             "@walletpack/core/services/secure/HardwareService";
-import StoreService from                "@walletpack/core/services/utility/StoreService";
-import TokenService from                "@walletpack/core/services/utility/TokenService";
-import EventService from                "@walletpack/core/services/utility/EventService";
-import SigningService from              "@walletpack/core/services/secure/SigningService";
+import Plugin from                      '@abank/core/plugins/Plugin';
+import * as PluginTypes from            '@abank/core/plugins/PluginTypes';
+import * as Actions from                '@abank/core/models/api/ApiActions';
+import {Blockchains} from               '@abank/core/models/Blockchains'
+import Network from                     '@abank/core/models/Network'
+import KeyPairService from              '@abank/core/services/secure/KeyPairService';
+import Token from                       "@abank/core/models/Token";
+import HardwareService from             "@abank/core/services/secure/HardwareService";
+import StoreService from                "@abank/core/services/utility/StoreService";
+import TokenService from                "@abank/core/services/utility/TokenService";
+import EventService from                "@abank/core/services/utility/EventService";
+import SigningService from              "@abank/core/services/secure/SigningService";
 
 import TronWeb from 'tronweb';
 const ethUtil = require('ethereumjs-util');

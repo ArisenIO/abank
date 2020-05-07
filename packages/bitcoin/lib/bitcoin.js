@@ -1,15 +1,15 @@
-import Plugin from                      '@walletpack/core/plugins/Plugin';
-import * as PluginTypes from            '@walletpack/core/plugins/PluginTypes';
-import {Blockchains} from               '@walletpack/core/models/Blockchains'
-import Network from                     "@walletpack/core/models/Network";
-import Token from                       "@walletpack/core/models/Token";
-import ObjectHelpers from               "@walletpack/core/util/ObjectHelpers";
-import KeyPairService from              "@walletpack/core/services/secure/KeyPairService";
-import StoreService from                "@walletpack/core/services/utility/StoreService";
-import * as Actions from                "@walletpack/core/models/api/ApiActions";
-import {GET, POST} from                 "@walletpack/core/services/apis/BackendApiService";
-import EventService from                "@walletpack/core/services/utility/EventService";
-import SigningService from              "@walletpack/core/services/secure/SigningService";
+import Plugin from                      '@abank/core/plugins/Plugin';
+import * as PluginTypes from            '@abank/core/plugins/PluginTypes';
+import {Blockchains} from               '@abank/core/models/Blockchains'
+import Network from                     "@abank/core/models/Network";
+import Token from                       "@abank/core/models/Token";
+import ObjectHelpers from               "@abank/core/util/ObjectHelpers";
+import KeyPairService from              "@abank/core/services/secure/KeyPairService";
+import StoreService from                "@abank/core/services/utility/StoreService";
+import * as Actions from                "@abank/core/models/api/ApiActions";
+import {GET, POST} from                 "@abank/core/services/apis/BackendApiService";
+import EventService from                "@abank/core/services/utility/EventService";
+import SigningService from              "@abank/core/services/secure/SigningService";
 
 const bitcoin = require('bitcoinjs-lib');
 
